@@ -1,8 +1,5 @@
 package project.controller;
 
-/**
- * Created by agustis 23.11.2015.
- */
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

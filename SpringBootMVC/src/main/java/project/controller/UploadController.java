@@ -1,8 +1,5 @@
 package project.controller;
 
-/**
- * Created by johannesthorkell on 3.10.2015.
- */
 
 import java.io.BufferedOutputStream;
 import java.io.File;

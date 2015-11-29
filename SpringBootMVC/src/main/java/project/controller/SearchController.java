@@ -1,8 +1,5 @@
 package project.controller;
 
-/**
- * Created by johannesthorkell on 3.10.2015.
- */
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

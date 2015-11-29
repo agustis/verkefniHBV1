@@ -10,9 +10,6 @@ import project.service.MediaFileRepository;
 
 import java.util.List;
 
-/**
- * Created by johannesthorkell on 13.10.2015.
- */
 
 @Controller
 @RequestMapping("/media")
