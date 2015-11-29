@@ -3,14 +3,14 @@ package project.service;
 /**
  * Created by johannesthorkell on 3.10.2015.
  */
-
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class MediaFile {
+public class MediaFile implements Serializable{
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

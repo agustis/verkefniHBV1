@@ -18,11 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import project.service.MediaFile;
 import project.service.MediaFileRepository;
+import org.springframework.ui.Model;
 
 @Controller
 public class UploadController {
-    // path þar sem uploadaðar skrár eru vistaðar í skráarkerfi
-    private String PATH = "/Users/johannesthorkell/Developer/spring_prufa/SpringBootMVC/target/mediaFiles/";
+    // path þar sem uploadaðar suploadmediakrár eru vistaðar í skráarkerfi
+    private String PATH = "/home/agustis/IdeaProjects/verkefniHBV1/SpringBootMVC/target/mediaFiles/";
     private int randomLength = 8;
 
     @Autowired
@@ -38,13 +39,16 @@ public class UploadController {
     // tags og type skránna í gagnagrunni.
     @RequestMapping(value = "/uploadmedia", method = RequestMethod.POST)
     public String uploadSubmit(@RequestParam(value="files[]") MultipartFile[] files,
-                               @RequestParam("tags[]") String[] tags, @RequestParam("types[]") String[] types)
+                               @RequestParam("tags[]") String[] tags,
+                               @RequestParam("types[]") String[] types,
+                               Model model)
     {
         String[] tagsArray;
         MultipartFile file;
-        String name;
-        String tag;
-        String type;
+        String name = "";
+        String tag  = "";
+        String type = "";
+        String message ="";
 
         for (int i = 0; i < files.length; i++) {
             file = files[i];
@@ -69,13 +73,17 @@ public class UploadController {
                         repository.save(new MediaFile(name, tag, PATH, type));
                     }
                     System.out.println("Success!");
+                    message = "Success!";
                 } catch (Exception e) {
                     System.out.println("Failure... " + e.getMessage());
+                    message = "Failure. " + e.getMessage();
                 }
             } else {
                 System.out.println("file is empty");
+                message = "File is empty";
             }
         }
+        model.addAttribute("message", message);
         return "upload";
     }
 

@@ -7,6 +7,7 @@
     <groupId>HBV501G</groupId>
     <artifactId>Spring_Web_MVC</artifactId>
     <version>0.1</version>
+    <packaging>jar</packaging>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -49,7 +50,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>9.4-1200-jdbc41</version>
+            <version>9.4-1201-jdbc41</version>
         </dependency>
 
     </dependencies>

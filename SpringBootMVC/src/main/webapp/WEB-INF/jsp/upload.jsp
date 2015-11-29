@@ -50,23 +50,25 @@
                 var files = Array.prototype.slice.call(e.target.files);
                 files.forEach(function(file) {
                     var div = document.createElement('div');
-                    var span = document.createElement('span');
                     var li = document.createElement('li');
+                    var span = document.createElement('input');
+                    span.setAttribute("type", "button");
+                    span.setAttribute("value", "Cancel");
+                    span.setAttribute("class", "btn btn-primary");
 
                     span.addEventListener('click', removeFile, false);
                     var index = storedFiles.length;
                     div.setAttribute('data-index', index);
 
-                    div.appendChild(span);
                     div.appendChild(li);
                     div.appendChild(makeTagInput(index));
+                    div.appendChild(span);
                     ul.appendChild(div);
 
                     var name = file.name;
                     var dotIndex = name.lastIndexOf('.');
                     var type = dotIndex === -1 ? 'jpg' : name.substring(dotIndex);
                     li.textContent = name;
-                    span.textContent = 'X';
                     types.push(type);
                     storedFiles.push(file);
                 });
@@ -132,11 +134,15 @@
                 xmlhr.open('POST', '/uploadmedia', true);
 
                 xmlhr.onload = function(e) {
+                    var span_msg = document.createElement('span');
                     if(this.status == 200) {
                         console.log('success!');
+                        span_msg.textContent = "Success uploading file!";
                     } else {
                         console.log('no go');
+                        span_msg.textContent = "Failure uploading file!";
                     }
+                    ul.appendChild(span_msg);
                 };
 
                 xmlhr.send(data);
