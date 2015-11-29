@@ -48,7 +48,6 @@ public class UploadController {
         String name = "";
         String tag  = "";
         String type = "";
-        String message ="";
 
         for (int i = 0; i < files.length; i++) {
             file = files[i];
@@ -73,17 +72,14 @@ public class UploadController {
                         repository.save(new MediaFile(name, tag, PATH, type));
                     }
                     System.out.println("Success!");
-                    message = "Success!";
                 } catch (Exception e) {
                     System.out.println("Failure... " + e.getMessage());
-                    message = "Failure. " + e.getMessage();
                 }
             } else {
                 System.out.println("file is empty");
-                message = "File is empty";
+
             }
         }
-        model.addAttribute("message", message);
         return "upload";
     }
 

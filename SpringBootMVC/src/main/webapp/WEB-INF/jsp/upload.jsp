@@ -12,7 +12,7 @@
 
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,700'>
-        <link rel="stylesheet" type="text/css" href="<c:url value="../../../resources/static/css/styles.css" />" >
+        <link rel="stylesheet" type="text/css" href="css/styles.css" />
     </head>
     <body>
         <main class="container">
@@ -20,10 +20,14 @@
                 <div class="col-md-2"></div>
                 <div class="col-md-8 text-center">
                     <h1>Upload media</h1>
-                    <form method="POST" action="/uploadmedia" enctype="multipart/form-data" id="uploadForm">
-                        <div>File:<input type="file" name="files" id="files" multiple></div>
+                    <form method="POST" action="/uploadmedia" enctype="multipart/form-data" id="uploadForm" >
+                        <div style="float:inherit;">
+                            <p style="display:inline-block; float:inherit">File:</p>
+                            <input type="file" name="files" id="files" multiple style="display:inline;float:inherit">
+                        </div>
                         <ul id="fileInfo"></ul>
-                        <input type="Submit" class="btn btn-primary" value="Submit" />
+                        <input type="Submit" class="btn btn-primary" value="Submit"
+                                id="btnSubmit" style="float:inherit; display:inline-block;"/>
                     </form>
                     <br/>
                     <p><a href="/searchmedia" class="btn btn-primary" role="button">Search Media</a></p>
@@ -51,10 +55,13 @@
                 files.forEach(function(file) {
                     var div = document.createElement('div');
                     var li = document.createElement('li');
+
                     var span = document.createElement('input');
                     span.setAttribute("type", "button");
                     span.setAttribute("value", "Cancel");
                     span.setAttribute("class", "btn btn-primary");
+                    span.setAttribute("style","display:inline; float:inherit");
+
 
                     span.addEventListener('click', removeFile, false);
                     var index = storedFiles.length;
@@ -83,6 +90,7 @@
                 input.setAttribute('type', 'text');
                 input.setAttribute('class', 'tags');
                 input.setAttribute('data-index', index);
+                input.setAttribute("style","display:inline-block; float:inherit");
 
                 div.appendChild(span);
                 div.appendChild(input);
@@ -122,10 +130,12 @@
                     data.append('types[]', types[j]);
                 }
 
+                var span_msg = document.createElement('span');
                 // reset for new uploads
                 storedFiles = [];
                 types = [];
                 ul.textContent = '';
+                span_msg.textContent = '';
 
                 // Breyta þessu
                 data.append('type', 'image');
@@ -134,7 +144,6 @@
                 xmlhr.open('POST', '/uploadmedia', true);
 
                 xmlhr.onload = function(e) {
-                    var span_msg = document.createElement('span');
                     if(this.status == 200) {
                         console.log('success!');
                         span_msg.textContent = "Success uploading file!";
